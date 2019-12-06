@@ -39,6 +39,7 @@
         ("rétro-futuriste"), des options (["portes papillon",
         "caisse en fibre de verre"]).
 
+        
         2. Créez un second objet dont le prototype sera la DeLorean que vous
         venez de construire.
 
@@ -46,6 +47,35 @@
         voyager dans le temps (ces deux propriétés seront des méthodes de la
         DeLorean volante).
       */
+      const model = "Delorean DMC-12";
+      const wheels = 4;
+      const look = "rétro-futuriste";
+      const options = ["portes papillon", "caisse en fibre de verre"];
+
+      const deLorean = {
+        model,
+        wheels,
+        look,
+        options
+      }
+      //PART 2
+      const deLorean2 = Object.assign({},deLorean);
+      console.dir(deLorean2);
+
+      //PART 3
+      const flyAndTimeTravel =  {
+        takeOff : function() {
+        console.log(this.model +" is flying !");
+      },
+      timeTravel : function(){
+        console.log("from 2019..... to........1992");
+      }
+      };
+
+      const deLorean3 = Object.assign({},deLorean,flyAndTimeTravel);
+      deLorean3.takeOff();
+      deLorean3.timeTravel();
+      
     </script>
     <noscript>
       <p>VirtuoWorks® - tous droits réservés©</p>
