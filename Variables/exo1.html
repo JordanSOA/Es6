@@ -67,48 +67,55 @@
         Choisissez de déclarer vos variables constantes quand c'est possible
         dans chaque cas de figure.
       */
-      //
+
       (function() {
-        var foo = "foo";
+        let foo = "foo";
         foo = "bar";
         console.log(foo);
       })()
 
       //
+  
       (function() {
-        var messageDeFin;
-        var choixDifficile = prompt("Voulez-vous ");
+        const messageDeFin;
+        const choixDifficile = prompt("Voulez-vous ");
       })()
 
       //
+      const objet = {
+          name: "toto"
+        };
       (function() {
-        var objet = {
+        const objet = {
           name: "toto"
         };
         objet.test = 123;
       })()
+      console.log(objet);
+
+      //
+      const stuff = "enfin fini !";
+      console.log((function() {
+        const stuff = "enfin fini !";
+        return stuff;
+      })());
+
 
       //
       (function() {
-        var stuff;
-        stuff = "enfin fini !";
-      })()
-
-      //
-      (function() {
-        function doStuff() {
-          var
-        }
+        const doStuff = ()=>{console.log('Doing Stuff !')};
+        return doStuff();
       })()
 
       /*
         Corrigez les codes suivants.
       */
-      const GRAVITY_ACCELERATION = 9.81;
-
       function reverseGravity() {
+        const GRAVITY_ACCELERATION = 9.81;
         GRAVITY_ACCELERATION = -GRAVITY_ACCELERATION;
+        return GRAVITY_ACCELERATION;
       }
+      console.log(reverseGravity());
     </script>
     <noscript>
       <p>VirtuoWorks® - tous droits réservés©</p>
