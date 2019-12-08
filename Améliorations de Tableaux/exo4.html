@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Améliorations de tableaux</title>
-  </head>
-  <body>
-    <script>
-      /*
-        NOUVEAU !
-        ES6 introduit 2 nouvelles méthodes d'instance pour modifier le contenu
-        d'un tableau, `Array.prototype.fill()` et `Array.prototype.copyWithin()`.
 
-        `Array.prototype.fill(valeur [, début] [, fin])`
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Améliorations de tableaux</title>
+</head>
 
-        /!\ ATTENTION : ces deux méthodes sont destructives ! La référence au
-        tableau renvoyé est la même que la référence au tableau fourni.
-        Autres exemples de méthodes destructives :
-          - Array.prototype.pop()
-          - Array.prototype.push()
-          - Array.prototype.reverse()
-          - Array.prototype.shift()
-          - Array.prototype.sort()
-          - Array.prototype.splice()
-          - Array.prototype.unshift()
-      */
+<body>
+  <script>
+    /*
+      NOUVEAU !
+      ES6 introduit 2 nouvelles méthodes d'instance pour modifier le contenu
+      d'un tableau, `Array.prototype.fill()` et `Array.prototype.copyWithin()`.
 
-      /*
-        1. Tester la méthode .fill() dans la console de votre navigateur.
+      `Array.prototype.fill(valeur [, début] [, fin])`
 
-        N.B : C'est un exercice reposant :)
-      */
-    </script>
-    <noscript>
-      <p>VirtuoWorks® - tous droits réservés©</p>
-    </noscript>
-  </body>
+      /!\ ATTENTION : ces deux méthodes sont destructives ! La référence au
+      tableau renvoyé est la même que la référence au tableau fourni.
+      Autres exemples de méthodes destructives :
+        - Array.prototype.pop()
+        - Array.prototype.push()
+        - Array.prototype.reverse()
+        - Array.prototype.shift()
+        - Array.prototype.sort()
+        - Array.prototype.splice()
+        - Array.prototype.unshift()
+    */
+
+    /*
+      1. Tester la méthode .fill() dans la console de votre navigateur.
+
+      N.B : C'est un exercice reposant :)
+    */
+    //Tiré du MDN :
+    const array1 = [1, 2, 3, 4];
+    console.log(array1.fill(0, 2, 4)); //[1, 2, 0, 0]
+    console.log(array1.fill(5, 1)); //[1, 5, 5, 5]
+    console.log(array1.fill(6)); //[6, 6, 6, 6]
+  </script>
+  <noscript>
+    <p>VirtuoWorks® - tous droits réservés©</p>
+  </noscript>
+</body>
+
 </html>
