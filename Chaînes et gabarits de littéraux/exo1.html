@@ -58,6 +58,25 @@
         précédente, modifiez la fonction cluedo afin qu'elle renvoie des
         accusations aléatoires en combinant les 3 tableaux précédents.
       */
+
+      const arrSuspect = ["Casimir", "SpongeBob", "Twinkie winkie", "Dora", "Oui-Oui"];
+      const arrRoom = ["the patio","the bathroom", "the lobby","the jacuzzi", " the basement"];
+      const arrWeapon = ["a spoon ", "a gun", "a dagger", "a bad song", "uncooked pork"];
+
+      const cluedo = (suspect, room, weapon)=>{
+        suspect,
+        room,
+        weapon,
+        alert(`Its ${suspect[returnN(suspect)]} in ${arrRoom[returnN(room)]} with ${arrWeapon[returnN(weapon)]}!`);
+      }
+
+      const returnN = (arr)=>{
+        const rand = Math.floor(Math.random() * arr.length);
+        return rand;
+      };
+
+      cluedo(arrSuspect, arrRoom, arrWeapon);
+      
     </script>
     <noscript>
       <p>VirtuoWorks® - tous droits réservés©</p>
