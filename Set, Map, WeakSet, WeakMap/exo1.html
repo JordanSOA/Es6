@@ -33,6 +33,15 @@
 
         2. En parcourant ces 2 tableaux, construisez un jeu de cartes.
       */
+      const val = new Set(["2","3","4","5","6","7","8","9","10","Valet","Reine","Roi","As"]);
+      const coul = new Set(["Pique", "Coeur","Trèfle","Carreau"]);
+      for (let v of coul.values()) {
+        for(let i of val.values()){
+          console.log(i +" de "+v);
+        }
+        console.log("-------------------------------");
+      } 
+
     </script>
     <noscript>
       <p>VirtuoWorks® - tous droits réservés©</p>
