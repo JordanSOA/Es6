@@ -79,6 +79,40 @@
         r3 et r4 dans la console et vérifiez que vous obtenez les mêmes valeurs
         que pour r1 et r2.
       */
+
+      class Rectangle{
+        constructor(x,y,lo,la){
+          this.x = x;
+          this.y = y;
+          this.lo = lo;
+          this.la = la;
+        }
+      };
+
+      var r1 = new Rectangle(1,1,4,7);
+      var r2 = new Rectangle(-3,6,6,3);
+      console.log(r1);
+      console.log(r2);
+
+      console.log(Rectangle.prototype);
+      console.log(r1.__proto__);
+      console.log(r2.__proto__);
+
+      var RectangleES5 = (function(){
+        function RectangleES5(x,y,lo,la){
+          this.x = x;
+          this.y = y;
+          this.lo = lo;
+          this.la = la;
+        }
+        return RectangleES5;
+      }());
+
+      var r3 = new RectangleES5(1,1,4,7);
+      var r4 = new RectangleES5(-3,6,6,3);
+      console.log(r3);
+      console.log(r4);
+
     </script>
     <noscript>
       <p>VirtuoWorks® - tous droits réservés©</p>
