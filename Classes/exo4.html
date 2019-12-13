@@ -93,6 +93,72 @@
         Créez un rectangle r4 qui sera l'intersection des rectangles r1 et r2.
         Verifiez dans la console que r4 vaut bien `null`.
       */
+
+      class Rectangle {
+      constructor(x, y, h, w) {
+        this.x = x;
+        this.y = y;
+        this.h = h;
+        this.w = w;
+      }
+
+      deplaceA(déplacementX, déplacementY) {
+        this.x = déplacementX;
+        this.y = déplacementY;
+      }
+
+      redimensionner(a, b) {
+        this.h = a;
+        this.w = b;
+      }
+
+      get haut(){
+        var bDroit = this.x + this.w;
+        return " Côté Droit du Haut (x:"+bDroit+",y:"+this.y+")| Côté Gauche du Haut (x:"+this.x+",y:"+this.y+")";
+      }
+
+      get bas(){
+        let bBas = this.y + this.h;
+        return "Côté Droit du Bas (x:"+(this.x + this.w)+",y:"+bBas+")| Côté Gauche  du Bas (x:"+this.x+",y:"+bBas+")";
+      }
+
+      get gauche(){
+        return  "Haut du bord Gauche (x:"+this.x+",y:"+this.y+")| Bas du Bord Gauche (x:"+this.x+",y"+(this.y + this.h)+")";
+      }
+
+      get droite(){
+        return "Haut du bord Droit (x:"+(this.x + this.w)+",y:"+this.y+")| Bas du bord Droit (x:"+(this.x + this.w)+",y:"+(this.y + this.h)+")";
+      }
+
+      static intersection(rec1,rec2){
+        if (rec1.droite > rec2.gauche && rec1.gauche < rec2.droite && rec1.bas > rec2.haut && rec1.haut < rec2.bas){
+          x = Math.max(rec1.gauche, rec2.gauche);
+          y = Math.max(rec1.haut, rec2.haut);
+          w = Math.min(rec1.droite, rec2.droite) - x;
+          h = Math.min(rec1.bas, rec2.bas) - y;
+          var interRec = new Rectangle(x,y,w,h);
+        } else {
+          var interRec = new Rectangle(Math.max(rec1.gauche, rec2.gauche),Math.max(rec1.haut, rec2.haut),Math.min(rec1.droite, rec2.droite) - x,Math.min(rec1.bas, rec2.bas) - y);
+          return null;
+        }
+      }
+    };
+
+    var r1 = new Rectangle(4, 4, 20, 60);
+    var r2 = new Rectangle(10, 10, 15, 40);
+    console.log(r1);
+    console.log(r2);
+    var r1Haut = r1.haut;
+    var r1Bas = r1.bas;
+    var r1Droite = r1.droite;
+    var r1Gauche = r1.gauche;
+    var r2Haut = r2.haut;
+    var r2Bas = r2.bas;
+    var r2Droite = r2.droite;
+    var r2Gauche = r2.gauche;
+    var r3 = Rectangle.intersection(r1,r2);
+    console.log(r3);
+
     </script>
     <noscript>
       <p>VirtuoWorks® - tous droits réservés©</p>

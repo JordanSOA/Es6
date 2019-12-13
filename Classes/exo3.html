@@ -132,52 +132,29 @@
         this.w = b;
       }
 
-      get haut(){
-        var bDroit = this.x + this.w;
-        return " Côté Droit du Haut (x:"+bDroit+",y:"+this.y+")| Côté Gauche du Haut (x:"+this.x+",y:"+this.y+")";
+
+      get topLeft(){
+        return this.x+","+this.y;
       }
 
-      get bas(){
-        let bBas = this.y + this.h;
-        return "Côté Droit du Bas (x:"+(this.x + this.w)+",y:"+bBas+")| Côté Gauche  du Bas (x:"+this.x+",y:"+bBas+")";
+      get topRight(){
+        return (this.x + this.w)+","+this.y;
       }
 
-      get gauche(){
-        return  "Haut du bord Gauche (x:"+this.x+",y:"+this.y+")| Bas du Bord Gauche (x:"+this.x+",y"+(this.y + this.h)+")";
+      get bottomRight(){
+        return (this.x + this.w)+","+(this.y + this.h);
       }
 
-      get droite(){
-        return "Haut du bord Droit (x:"+(this.x + this.w)+",y:"+this.y+")| Bas du bord Droit (x:"+(this.x + this.w)+",y:"+(this.y + this.h)+")";
+      get bottomLeft(){
+        return this.x+","+(this.y + this.h);
       }
     };
 
     var r1 = new Rectangle(1, 1, 4, 7);
     var r2 = new Rectangle(-3, 6, 6, 3);
-    console.log(r1);
-    console.log(r2);
-    r1.deplaceA(2, 4);
-    r1.redimensionner(5, 10);
-    r2.deplaceA(-1, 3);
-    r2.redimensionner(4, 20);
-    console.log(r1);
-    console.log(r2);
-    var r1Haut = r1.haut;
-    var r1Bas = r1.bas;
-    var r1Droite = r1.droite;
-    var r1Gauche = r1.gauche;
-    var r2Haut = r2.haut;
-    var r2Bas = r2.bas;
-    var r2Droite = r2.droite;
-    var r2Gauche = r2.gauche;
-    console.log(r1Haut);
-    console.log(r1Bas);
-    console.log(r1Gauche);
-    console.log(r1.droite);
-    console.log(r2Haut);
-    console.log(r2Bas);
-    console.log(r2Gauche);
-    console.log(r2.droite);
 
+    console.log("4 coins: CoinGaucheHaut: "+r1.topLeft+ " CoinDroitHaut: "+r1.topRight+" CoinDroitBas: "+r1.bottomRight+" CoinGaucheBas: "+r1.bottomLeft);
+    console.log("4 coins: CoinGaucheHaut: "+r2.topLeft+ " CoinDroitHaut: "+r2.topRight+" CoinDroitBas: "+r2.bottomRight+" CoinGaucheBas: "+r2.bottomLeft);
     </script>
     <noscript>
       <p>VirtuoWorks® - tous droits réservés©</p>
