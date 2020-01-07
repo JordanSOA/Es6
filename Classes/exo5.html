@@ -76,6 +76,109 @@
         renverra un nouveau rectangle coloré en recopiant les caractéristiques
         d'un rectangle simple.
       */
+      class Rectangle {
+      constructor(x, y, h, w) {
+        this.x = x;
+        this.y = y;
+        this.h = h;
+        this.w = w;
+      }
+
+      deplaceA(déplacementX, déplacementY) {
+        this.x = déplacementX;
+        this.y = déplacementY;
+      }
+
+      redimensionner(a, b) {
+        this.h = a;
+        this.w = b;
+      }
+
+      get topLeft(){
+        return new Point(this.x,this.y);
+      }
+
+      get topRight(){
+        return new Point((this.x + this.w), this.y);
+      }
+
+      get bottomRight(){
+        return new Point((this.x + this.w), (this.y + this.h));
+      }
+
+      get bottomLeft(){
+        return new Point(this.x, (this.y + this.h));
+      }
+
+      get topLine(){
+        return new Line(this.topLeft, this.topRight);
+      }
+      get bottomLine(){
+        return new Line(this.bottomLeft, this.bottomRight);
+      }
+
+      get rightSideLine(){
+        return new Line(this.topRight,this.bottomRight);
+      }
+
+      get leftSideLine(){
+        return new Line(this.topLeft,this.bottomLeft);
+      }
+
+      static intersection(rec1,rec2){
+        if (rec1.rightSideLine.pointDLine.pointPosX > rec2.leftSideLine.pointDLine.pointPosX &&
+        rec1.leftSideLine.pointDLine.pointPosX < rec2.rightSideLine.pointDLine.pointPosX &&
+        rec1.bottomLine.pointGLine.pointPosY > rec2.topLine.pointGLine.pointPosY &&
+        rec1.topLine.pointGLine.pointPosY < rec2.bottomLine.pointGLine.pointPosY){
+          var x = Math.max(rec1.leftSideLine.pointDLine.pointPosX, rec2.leftSideLine.pointDLine.pointPosX);
+          var y = Math.max(rec1.topLine.pointGLine.pointPosY, rec2.topLine.pointGLine.pointPosY);
+          var w = Math.min(rec1.rightSideLine.pointDLine.pointPosX, rec2.rightSideLine.pointDLine.pointPosX) - x;
+          var h = Math.min(rec1.bottomLine.pointGLine.pointPosY, rec2.bottomLine.pointGLine.pointPosY) - y;
+          console.log(x,y,h,w);
+          return new Rectangle(x,y,h,w);
+        } else {
+          return null;
+        }
+      }
+
+
+    };
+
+    class RectangleColoré extends Rectangle{
+      constructor(x,y,h,w, color){
+        super(x,y,h,w);
+        this.color = color;
+      }
+
+      static dériverDe(rec,color){
+        this.x = rec.x;
+        this.y = rec.y;
+        this.h = rec.h;
+        this.w = rec.w;
+        this.color = color;
+        return new RectangleColoré(this.x,this.y,this.h,this.w,color);
+      }
+    };
+
+    class Carré extends Rectangle{
+      constructor(x,y,h,w){
+        super(x,y,h,w);
+        this.w = this.h;
+      }
+    }
+
+    var r1 = new Rectangle(4, 4, 20, 60);
+
+    var r3 = new RectangleColoré(9,15,20,40,'blue');
+    console.log(r3);
+
+    var r4 = new Carré(3,3,20);
+    console.log(r4);
+
+    var r5 = RectangleColoré.dériverDe(r1,"yellow");
+    console.log(r5);
+
+
     </script>
     <noscript>
       <p>VirtuoWorks® - tous droits réservés©</p>

@@ -1,100 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Classes</title>
-    <style>
-      canvas {
-        border: 1px solid black;
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Classes</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- La balise canvas dans laquelle nous allons dessiner nos rectangles. -->
+  <canvas id="canvas" width="480" height="320"></canvas>
+
+  <script>
+    /*
+      RAPPEL :
+      La balise <canvas> est utilisée pour faire du dessin 2D ou 3D dans le
+      navigateur. Elle propose une API standard pour dessiner des formes,
+      créer des effets, manipuler des pixels, afficher et manipuler des
+      images, etc.
+
+      Pour dessiner sur une balise <canvas> on commence par récupérer une
+      référence à l'élément <canvas> du DOM, puis on appelle la méthode
+      `.getContext()` sur cette référence en passant le paramètre "2d" comme
+      suit :
+
+        ------------------------------------------------------------
+        // On récupère une référence à la balise <canvas>.
+        const élémentCanvas = document.getElementById("canvas");
+
+        // On obtient un objet de type `CanvasRenderingContext2D` grâce auquel
+        dessiner sur le canvas.
+        const contexte = élémentCanvas.getContext("2d");
+        ------------------------------------------------------------
+
+      Documentation :
+      - https://developer.mozilla.org/fr/docs/Web/HTML/Canvas
+      - https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D
+    */
+
+    /*
+      1. Récupérez une référence à l'élément <canvas> du DOM et stockez-la
+      dans une variable.
+
+      2. Faites en sorte d'obtenir une référence au contexte de rendu 2D du
+      canevas récupéré précédemment et stockez-la dans une autre variable.
+
+      3. Appelez la méthode `.strokeRect()` sur l'objet représentant le
+      contexte de rendu 2D récupéré à la question 2 afin de dessiner le
+      contour d'un rectangle sur le canevas. Cette méthode prend en arguments
+      l'abscisse et l'ordonnée du coin supérieur gauche du rectangle, ainsi
+      que la largeur et la hauteur.
+
+      https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/strokeRect
+    */
+
+    /*
+      Nous allons nous servir de la balise <canvas> de la page pour dessiner
+      nos rectangles.
+
+      4. Effacez le canevas en appelant la méthode `.clearRect()` sur l'objet
+      de contexte de rendu 2D.
+      Cette méthode prend en argument les coordonnées du coin supérieur gauche
+      du rectangle à effacer ainsi que la largeur et la hauteur. Le coin
+      supérieur gauche du canevas est à (0, 0) et la largeur et la hateur du
+      canevas sont des propriété de l'objet obtenu à la question 1.
+
+      5. Reprenez le code de la classe Rectangle de l'exercice précédent et
+      ajoutez-y une méthode d'instance appelée `dessiner` qui prendra en
+      paramètre un contexte de rendu 2D `contexte` et un booléen `remplissage`
+      pour préciser si l'on souhaite un rectangle vide ou plein.
+
+      6. Faites en sorte que l'appel à cette fonction déclenche l'affichage du
+      rectangle dans la balise <canvas>. Vous ferez appel à la méthode
+      `.strokeRect()` (pour un dessin de contour) ou `.fillRect()` (pour un
+      rectangle plein) sur l'objet de contexte de rendu 2D en fonction de la
+      valeur du paramètre `remplissage`.
+
+      7. Créez deux rectangles r1 et r2 et appelez leurs
+      méthodes `.dessiner()` pour afficher leur contour dans la
+      balise <canvas>.
+        r1 : (100, 50), (200, 50), (200, 120), (100, 120)
+        r2 : (160, 90), (300, 90), (300, 250), (160, 250)
+
+      8. Créez un rectangle r3 qui sera le résultat de l'intersection de r1 et
+      r2. Dessinez ce rectangle plein dans la balise <canvas>.
+
+      9. Réécrivez la classe Rectangle en code ES5
+      (appelez-la `RectangleES5`).
+    */
+
+    //Version Es6 à 'décommenter' + init à ligne 216-224
+    /*  
+    class Point{
+        constructor(a,b){
+          this.pointPosX = a;
+          this.pointPosY = b;
+        }
+
       }
-    </style>
-  </head>
-  <body>
-    <!-- La balise canvas dans laquelle nous allons dessiner nos rectangles. -->
-    <canvas id="canvas" width="480" height="320"></canvas>
 
-    <script>
-      /*
-        RAPPEL :
-        La balise <canvas> est utilisée pour faire du dessin 2D ou 3D dans le
-        navigateur. Elle propose une API standard pour dessiner des formes,
-        créer des effets, manipuler des pixels, afficher et manipuler des
-        images, etc.
+      class Line {
+        constructor(g,d){
+          this.pointGLine = g;
+          this.pointDLine = d;
+        }
+      }
 
-        Pour dessiner sur une balise <canvas> on commence par récupérer une
-        référence à l'élément <canvas> du DOM, puis on appelle la méthode
-        `.getContext()` sur cette référence en passant le paramètre "2d" comme
-        suit :
+      class Rectangle {
+      constructor(x, y, h, w) {
+        this.x = x;
+        this.y = y;
+        this.h = h;
+        this.w = w;
+      }
 
-          ------------------------------------------------------------
-          // On récupère une référence à la balise <canvas>.
-          const élémentCanvas = document.getElementById("canvas");
+      deplaceA(déplacementX, déplacementY) {
+        this.x = déplacementX;
+        this.y = déplacementY;
+      }
 
-          // On obtient un objet de type `CanvasRenderingContext2D` grâce auquel
-          dessiner sur le canvas.
-          const contexte = élémentCanvas.getContext("2d");
-          ------------------------------------------------------------
+      redimensionner(a, b) {
+        this.h = a;
+        this.w = b;
+      }
 
-        Documentation :
-        - https://developer.mozilla.org/fr/docs/Web/HTML/Canvas
-        - https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D
-      */
+      dessiner(ctx, rempli){
+        if (rempli){
+          console.log("Rempli");
+          contexte.strokeStyle = 'green';
+          contexte.fillRect(this.x,this.y,this.w,this.h);
+        } else {
+          console.log("Vide");
+          contexte.strokeStyle = 'green';
+          contexte.strokeRect(this.x,this.y,this.w,this.h);
+        }
+        return contexte;
+      }
 
-      /*
-        1. Récupérez une référence à l'élément <canvas> du DOM et stockez-la
-        dans une variable.
+      get topLeft(){
+        return new Point(this.x,this.y);
+      }
 
-        2. Faites en sorte d'obtenir une référence au contexte de rendu 2D du
-        canevas récupéré précédemment et stockez-la dans une autre variable.
+      get topRight(){
+        return new Point((this.x + this.w), this.y);
+      }
 
-        3. Appelez la méthode `.strokeRect()` sur l'objet représentant le
-        contexte de rendu 2D récupéré à la question 2 afin de dessiner le
-        contour d'un rectangle sur le canevas. Cette méthode prend en arguments
-        l'abscisse et l'ordonnée du coin supérieur gauche du rectangle, ainsi
-        que la largeur et la hauteur.
+      get bottomRight(){
+        return new Point((this.x + this.w), (this.y + this.h));
+      }
 
-        https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/strokeRect
-      */
+      get bottomLeft(){
+        return new Point(this.x, (this.y + this.h));
+      }
 
-      /*
-        Nous allons nous servir de la balise <canvas> de la page pour dessiner
-        nos rectangles.
+      get topLine(){
+        return new Line(this.topLeft, this.topRight);
+      }
+      get bottomLine(){
+        return new Line(this.bottomLeft, this.bottomRight);
+      }
 
-        4. Effacez le canevas en appelant la méthode `.clearRect()` sur l'objet
-        de contexte de rendu 2D.
-        Cette méthode prend en argument les coordonnées du coin supérieur gauche
-        du rectangle à effacer ainsi que la largeur et la hauteur. Le coin
-        supérieur gauche du canevas est à (0, 0) et la largeur et la hateur du
-        canevas sont des propriété de l'objet obtenu à la question 1.
+      get rightSideLine(){
+        return new Line(this.topRight,this.bottomRight);
+      }
 
-        5. Reprenez le code de la classe Rectangle de l'exercice précédent et
-        ajoutez-y une méthode d'instance appelée `dessiner` qui prendra en
-        paramètre un contexte de rendu 2D `contexte` et un booléen `remplissage`
-        pour préciser si l'on souhaite un rectangle vide ou plein.
+      get leftSideLine(){
+        return new Line(this.topLeft,this.bottomLeft);
+      }
 
-        6. Faites en sorte que l'appel à cette fonction déclenche l'affichage du
-        rectangle dans la balise <canvas>. Vous ferez appel à la méthode
-        `.strokeRect()` (pour un dessin de contour) ou `.fillRect()` (pour un
-        rectangle plein) sur l'objet de contexte de rendu 2D en fonction de la
-        valeur du paramètre `remplissage`.
+      static intersection(rec1,rec2){
+        if (rec1.rightSideLine.pointDLine.pointPosX > rec2.leftSideLine.pointDLine.pointPosX &&
+        rec1.leftSideLine.pointDLine.pointPosX < rec2.rightSideLine.pointDLine.pointPosX &&
+        rec1.bottomLine.pointGLine.pointPosY > rec2.topLine.pointGLine.pointPosY &&
+        rec1.topLine.pointGLine.pointPosY < rec2.bottomLine.pointGLine.pointPosY){
+          var x = Math.max(rec1.leftSideLine.pointDLine.pointPosX, rec2.leftSideLine.pointDLine.pointPosX);
+          var y = Math.max(rec1.topLine.pointGLine.pointPosY, rec2.topLine.pointGLine.pointPosY);
+          var w = Math.min(rec1.rightSideLine.pointDLine.pointPosX, rec2.rightSideLine.pointDLine.pointPosX) - x;
+          var h = Math.min(rec1.bottomLine.pointGLine.pointPosY, rec2.bottomLine.pointGLine.pointPosY) - y;
+          return new Rectangle(x,y,h,w);
+        } else {
+          return null;
+        }
+      }
 
-        7. Créez deux rectangles r1 et r2 et appelez leurs
-        méthodes `.dessiner()` pour afficher leur contour dans la
-        balise <canvas>.
-          r1 : (100, 50), (200, 50), (200, 120), (100, 120)
-          r2 : (160, 90), (300, 90), (300, 250), (160, 250)
+    };
 
-        8. Créez un rectangle r3 qui sera le résultat de l'intersection de r1 et
-        r2. Dessinez ce rectangle plein dans la balise <canvas>.
+    class RectangleColoré extends Rectangle{
+      constructor(x,y,h,w, color){
+        super(x,y,h,w);
+        this.color = color;
+      }
 
-        9. Réécrivez la classe Rectangle en code ES5
-        (appelez-la `RectangleES5`).
-      */
-    </script>
-    <noscript>
-      <p>VirtuoWorks® - tous droits réservés©</p>
-    </noscript>
-  </body>
+      static dériverDe(rec,color){
+        this.x = rec.x;
+        this.y = rec.y;
+        this.h = rec.h;
+        this.w = rec.w;
+        this.color = color;
+        return new RectangleColoré(this.x,this.y,this.h,this.w,color);
+      }
+    };
+    */
+
+    "use strict";
+    const élémentCanvas = document.getElementById("canvas");
+    const contexte = élémentCanvas.getContext("2d");
+
+    //Es6 à 'décommenter'
+    /*var r1 = new Rectangle(100,50,70,100);
+    console.log("4 coins: CoinGaucheHaut: "+(r1.topLeft.a+","+r1.topLeft.b)+ " CoinDroitHaut: "+(r1.topRight.a+","+r1.topRight.b)+" CoinDroitBas: "+(r1.bottomRight.a+" , "+r1.bottomRight.b)+" CoinGaucheBas: "+(r1.bottomLeft.a+","+r1.bottomLeft.b));
+    r1.dessiner(contexte,false);
+    var r2 = new Rectangle(160,90, 160, 140);
+    r2.dessiner(contexte,false);
+    console.log("4 coins: CoinGaucheHaut: "+(r2.topLeft.a+","+r2.topLeft.b)+ " CoinDroitHaut: "+(r2.topRight.a+","+r2.topRight.b)+" CoinDroitBas: "+(r2.bottomRight.a+" , "+r2.bottomRight.b)+" CoinGaucheBas: "+(r2.bottomLeft.a+","+r2.bottomLeft.b));
+    //Rectangle d'intersection
+    var r3 = Rectangle.intersection(r1,r2);
+    r3.dessiner(contexte,true);*/
+
+    //part9
+    var Point = (function () {
+      function Point(ptPosX, ptPosY) {
+        this.ptPosX = ptPosX;
+        this.ptPosY = ptPosY;
+      }
+      return Point;
+    }());
+    var Line = (function () {
+      function Line(ptGLine, ptDLine) {
+        this.ptGLine = ptGLine;
+        this.ptDLine = ptDLine;
+      }
+      return Line;
+    }())
+    var RectangleES5 = (function () {
+      function RectangleES5(x, y, h, w) {
+        this.x = x;
+        this.y = y;
+        this.h = h;
+        this.w = w;
+      }
+
+      RectangleES5.prototype.deplaceA = function (déplacementX, déplacementY) {
+        this.x = déplacementX;
+        this.y = déplacementY;
+      };
+
+      RectangleES5.prototype.redimensionner = function (a, b) {
+        this.h = a;
+        this.w = b;
+      };
+
+      //Getters
+      //Point getters
+      Object.defineProperty(RectangleES5.prototype, "topLeft", {
+        get: function () {
+          return new Point(this.x, this.y);
+        },
+        enumerable: true,
+        configurable: true
+      });
+      Object.defineProperty(RectangleES5.prototype, "topRight", {
+        get: function () {
+          return new Point((this.x + this.w), this.y);
+        },
+        enumerable: true,
+        configurable: true
+      });
+      Object.defineProperty(RectangleES5.prototype, "bottomRight", {
+        get: function () {
+          return new Point((this.x + this.w), (this.y + this.h));
+        },
+        enumerable: true,
+        configurable: true
+      });
+      Object.defineProperty(RectangleES5.prototype, "bottomLeft", {
+        get: function () {
+          return new Point(this.x, (this.y + this.h));
+        },
+        enumerable: true,
+        configurable: true
+      });
+
+      //Line getters
+      Object.defineProperty(RectangleES5.prototype, "topLine", {
+        get: function () {
+          return new Line(this.topLeft, this.topRight);
+        },
+        enumerable: true,
+        configurable: true
+      });
+      Object.defineProperty(RectangleES5.prototype, "bottomLine", {
+        get: function () {
+          return new Line(this.bottomLeft, this.bottomRight);
+        },
+        enumerable: true,
+        configurable: true
+      })
+      Object.defineProperty(RectangleES5.prototype, "rightSideLine", {
+        get: function () {
+          return new Line(this.topRight, this.bottomRight);
+        },
+        enumerable: true,
+        configurable: true
+      })
+      Object.defineProperty(RectangleES5.prototype, "leftSideLine", {
+        get: function () {
+          return new Line(this.topLeft, this.bottomLeft);
+        },
+        enumerable: true,
+        configurable: true
+      })
+
+      RectangleES5.prototype.dessiner = function (ctx, rempli) {
+        if (rempli) {
+          console.log("Rempli");
+          contexte.strokeStyle = 'green';
+          contexte.fillRect(this.x, this.y, this.w, this.h);
+        } else {
+          console.log("Vide");
+          contexte.strokeStyle = 'green';
+          contexte.strokeRect(this.x, this.y, this.w, this.h);
+        }
+        return contexte;
+      }
+
+      RectangleES5.intersection = function (rec1, rec2) {
+        if (rec1.rightSideLine.ptDLine.ptPosX > rec2.leftSideLine.ptDLine.ptPosX &&
+          rec1.leftSideLine.ptDLine.ptPosX < rec2.rightSideLine.ptDLine.ptPosX &&
+          rec1.bottomLine.ptGLine.ptPosY > rec2.topLine.ptGLine.ptPosY &&
+          rec1.topLine.ptGLine.ptPosY < rec2.bottomLine.ptGLine.ptPosY) {
+          var x = Math.max(rec1.leftSideLine.ptDLine.ptPosX, rec2.leftSideLine.ptDLine.ptPosX);
+          var y = Math.max(rec1.topLine.ptGLine.ptPosY, rec2.topLine.ptGLine.ptPosY);
+          var w = Math.min(rec1.rightSideLine.ptDLine.ptPosX, rec2.rightSideLine.ptDLine.ptPosX) - x;
+          var h = Math.min(rec1.bottomLine.ptGLine.ptPosY, rec2.bottomLine.ptGLine.ptPosY) - y;
+          return new RectangleES5(x, y, h, w);
+        } else {
+          return null;
+        }
+      };
+
+      return RectangleES5;
+    }());
+
+    var r1 = new RectangleES5(100, 50, 70, 100);
+    var r2 = new RectangleES5(160, 90, 160, 140);
+    var r3 = RectangleES5.intersection(r1, r2);
+    r1.dessiner(contexte, false);
+    r2.dessiner(contexte, false);
+    r3.dessiner(contexte,true);
+  </script>
+  <noscript>
+    <p>VirtuoWorks® - tous droits réservés©</p>
+  </noscript>
+</body>
+
 </html>

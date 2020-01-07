@@ -94,6 +94,21 @@
         Verifiez dans la console que r4 vaut bien `null`.
       */
 
+      class Point{
+        constructor(a,b){
+          this.pointPosX = a;
+          this.pointPosY = b;
+        }
+
+      }
+
+      class Line {
+        constructor(g,d){
+          this.pointGLine = g;
+          this.pointDLine = d;
+        }
+      }
+
       class Rectangle {
       constructor(x, y, h, w) {
         this.x = x;
@@ -113,45 +128,46 @@
       }
 
       get topLeft(){
-        return this.x+","+this.y;
+        return new Point(this.x,this.y);
       }
 
       get topRight(){
-        return (this.x + this.w)+","+this.y;
+        return new Point((this.x + this.w), this.y);
       }
 
       get bottomRight(){
-        return (this.x + this.w)+","+(this.y + this.h);
+        return new Point((this.x + this.w), (this.y + this.h));
       }
 
       get bottomLeft(){
-        return this.x+","+(this.y + this.h);
+        return new Point(this.x, (this.y + this.h));
       }
 
       get topLine(){
-        return `${this.topLeft},${this.topRight}`;
+        return new Line(this.topLeft, this.topRight);
       }
       get bottomLine(){
-        return `${this.bottomLeft},${this.bottomRight}`;
+        return new Line(this.bottomLeft, this.bottomRight);
       }
 
       get rightSideLine(){
-        return this.topRight,this.bottomRight;
+        return new Line(this.topRight,this.bottomRight);
       }
 
       get leftSideLine(){
-        return this.topLeft,this.bottomLeft;
+        return new Line(this.topLeft,this.bottomLeft);
       }
 
       static intersection(rec1,rec2){
-        if (rec1.rightSideLine > rec2.leftSideLine &&
-        rec1.leftSideLine < rec2.rightSideLine &&
-        rec1.bottomLine > rec2.topLine &&
-        rec1.topLine < rec2.bottomLine){
-          x = Math.max(rec1.leftSideLine, rec2.leftSideLine);
-          y = Math.max(rec1.topLine, rec2.topLine);
-          w = Math.min(rec1.rightSideLine, rec2.rightSideLine) - x;
-          h = Math.min(rec1.bottomLine, rec2.bottomLine) - y;
+        if (rec1.rightSideLine.pointDLine.pointPosX > rec2.leftSideLine.pointDLine.pointPosX &&
+        rec1.leftSideLine.pointDLine.pointPosX < rec2.rightSideLine.pointDLine.pointPosX &&
+        rec1.bottomLine.pointGLine.pointPosY > rec2.topLine.pointGLine.pointPosY &&
+        rec1.topLine.pointGLine.pointPosY < rec2.bottomLine.pointGLine.pointPosY){
+          var x = Math.max(rec1.leftSideLine.pointDLine.pointPosX, rec2.leftSideLine.pointDLine.pointPosX);
+          var y = Math.max(rec1.topLine.pointGLine.pointPosY, rec2.topLine.pointGLine.pointPosY);
+          var w = Math.min(rec1.rightSideLine.pointDLine.pointPosX, rec2.rightSideLine.pointDLine.pointPosX) - x;
+          var h = Math.min(rec1.bottomLine.pointGLine.pointPosY, rec2.bottomLine.pointGLine.pointPosY) - y;
+          console.log(x,y,h,w);
           return new Rectangle(x,y,h,w);
         } else {
           return null;
@@ -160,9 +176,14 @@
     };
 
     var r1 = new Rectangle(4, 4, 20, 60);
-    var r2 = new Rectangle(5, 5, 15, 40);
-    console.log(r1.rightSideLine);
-    console.log(r1.leftSideLine);
+    var r2 = new Rectangle(2, 5, 15, 40);
+    var r3 = Rectangle.intersection(r1,r2);
+    console.log(r1);
+    console.log(r2);
+    console.log(r3);
+
+    console.log(r3.topLeft, r3.topRight);
+    console.log(r3.bottomLeft, r3.bottomRight);
 
 
     </script>
